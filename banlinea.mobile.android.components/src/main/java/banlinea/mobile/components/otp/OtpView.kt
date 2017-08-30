@@ -1,10 +1,8 @@
 package banlinea.mobile.components.otp
 
 import android.content.Context
-import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
-import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.View
@@ -46,23 +44,6 @@ class OtpView @JvmOverloads constructor(
             i++
         }
         for(text:EditText in mTexts){
-            /*
-            text.addTextChangedListener(object : TextWatcher{
-                override fun afterTextChanged(p0: Editable?) {
-                    if (p0?.length == 1) {
-                        val nextText = mTexts.getOrNull(mTexts.indexOf(text)+1)
-                        nextText?.requestFocus()
-                    } else if (p0?.length == 0) {
-                        val nextText = mTexts.getOrNull(mTexts.indexOf(text)-1)
-                        nextText?.requestFocus()
-                    }
-                }
-
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            })*/
             text.setOnKeyListener(object: OnKeyListener{
                 override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
                     if(event?.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL){
