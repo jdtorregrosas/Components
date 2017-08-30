@@ -6,6 +6,7 @@ import android.text.InputFilter
 import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.view.KeyEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -23,14 +24,16 @@ class OtpView @JvmOverloads constructor(
     val mTexts : MutableList<EditText> = mutableListOf()
 
     init {
+        var hint: String = "*"
         var total: Int = 4
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.otp_attributes, 0, 0)
             total = typedArray.getInt(R.styleable.otp_attributes_size, 4)
+            hint = typedArray.getString(R.styleable.otp_attributes_hint)
             typedArray.recycle()
         }
-        val hint: String = "*"
-        var i = 0
+
+        var i : Int = 0
         while(i < total){
             val text = EditText(context)
             addView(text)
@@ -43,6 +46,7 @@ class OtpView @JvmOverloads constructor(
             i++
         }
         for(text:EditText in mTexts){
+            /*
             text.addTextChangedListener(object : TextWatcher{
                 override fun afterTextChanged(p0: Editable?) {
                     if (p0?.length == 1) {
@@ -57,6 +61,19 @@ class OtpView @JvmOverloads constructor(
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            })*/
+            text.setOnKeyListener(object: OnKeyListener{
+                override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                    if(event?.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL){
+                        val nextText = mTexts.getOrNull(mTexts.indexOf(text)-1)
+                        nextText?.requestFocus()
+                    } else if(event?.action == KeyEvent.ACTION_DOWN) {
+                        val nextText = mTexts.getOrNull(mTexts.indexOf(text)+1)
+                        nextText?.requestFocus()
+                    }
+                    return false
+                }
             })
         }
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
