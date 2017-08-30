@@ -17,6 +17,8 @@ import java.lang.reflect.AccessibleObject.setAccessible
 import android.widget.TextView
 import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
+import android.text.Editable
+import android.text.SpannableStringBuilder
 import android.util.TypedValue
 import android.view.inputmethod.InputMethodManager
 
@@ -110,6 +112,9 @@ class OtpView @JvmOverloads constructor(
                     } else if(event?.action == KeyEvent.ACTION_DOWN) {
                         val nextText = mTexts.getOrNull(mTexts.indexOf(text)+1)
                         nextText?.requestFocus()
+                        if(text.text.isNotEmpty()){
+                            text.text =  SpannableStringBuilder("")
+                        }
                     }
                     return false
                 }
