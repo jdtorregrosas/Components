@@ -3,5 +3,10 @@
     <declare-styleable name="otp_attributes">
         <attr name="size" format="integer" />
         <attr name="hint" format="string" />
+        <attr name="textColor" format="color" />
+        <attr name="hintColor" format="color" />
+        <attr name="tintColor" format="color" />
+        <attr name="spaceBetween" format="dimension" />
+        <attr name="textSize" format="dimension" />
     </declare-styleable>
 </resources>

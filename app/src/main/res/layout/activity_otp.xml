@@ -4,11 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="banlinea.mobile.components.OtpActivity">
-<banlinea.mobile.components.otp.OtpView
-    xmlns:otp="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    otp:size="7"
-    otp:hint="$"/>
+    tools:context="banlinea.mobile.components.OtpActivity"
+    android:background="#000">
+
+    <banlinea.mobile.components.otp.OtpView xmlns:otp="http://schemas.android.com/apk/res-auto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        otp:hint="|"
+        otp:hintColor="#eeaaee"
+        otp:layout_constraintBottom_toBottomOf="parent"
+        otp:layout_constraintEnd_toEndOf="parent"
+        otp:layout_constraintStart_toStartOf="parent"
+        otp:layout_constraintTop_toTopOf="parent"
+        otp:size="4"
+        otp:spaceBetween="10dp"
+        otp:textColor="#ff00ff"
+        otp:textSize="20sp"
+        otp:tintColor="#aa0" />
 </android.support.constraint.ConstraintLayout>
