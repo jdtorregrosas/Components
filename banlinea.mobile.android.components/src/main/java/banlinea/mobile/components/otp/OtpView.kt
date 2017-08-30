@@ -18,6 +18,7 @@ import android.widget.TextView
 import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
 import android.util.TypedValue
+import android.view.inputmethod.InputMethodManager
 
 
 /**
@@ -114,5 +115,21 @@ class OtpView @JvmOverloads constructor(
                 }
             })
         }
+    }
+
+    private fun closeKeyboard(){
+        val view = this
+        if (view != null) {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view!!.getWindowToken(), 0)
+        }
+    }
+    open fun getCode() : String{
+        var code = ""
+        for(text:AppCompatEditText in mTexts){
+            code += text.text
+        }
+        closeKeyboard()
+        return code
     }
 }
