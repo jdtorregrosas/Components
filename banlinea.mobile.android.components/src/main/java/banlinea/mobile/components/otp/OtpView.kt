@@ -10,14 +10,8 @@ import android.text.InputType
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.View
-import android.widget.EditText
 import android.widget.LinearLayout
 import banlinea.mobile.components.R
-import java.lang.reflect.AccessibleObject.setAccessible
-import android.widget.TextView
-import android.graphics.drawable.Drawable
-import android.support.annotation.DrawableRes
-import android.text.Editable
 import android.text.SpannableStringBuilder
 import android.util.TypedValue
 import android.view.inputmethod.InputMethodManager
