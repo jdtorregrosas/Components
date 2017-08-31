@@ -18,7 +18,8 @@ import android.view.inputmethod.InputMethodManager
 
 
 /**
- * Created by jdtor on 28.08.2017 for components.
+ * Created by jdtor on 28.08.2017
+ * OtpView Component
  */
 
 @SuppressLint("RestrictedApi")
@@ -38,7 +39,6 @@ class OtpView @JvmOverloads constructor(
     private var tintColor : Int = Color.MAGENTA
     private var textSize : Int = 0
     private var spaceBetween : Int = 0
-    // private lateinit var drawable : Drawable
 
     init {
         // Create fields and configure layout
@@ -55,7 +55,6 @@ class OtpView @JvmOverloads constructor(
             textColor = typedArray.getColor(R.styleable.otp_attributes_textColor, Color.BLACK)
             hintColor = typedArray.getColor(R.styleable.otp_attributes_hintColor, Color.GRAY)
             tintColor = typedArray.getColor(R.styleable.otp_attributes_tintColor, Color.MAGENTA)
-            // drawable = typedArray.getDrawable(R.styleable.otp_attributes_backgroundDrawable)
             textSize = typedArray.getDimensionPixelSize(R.styleable.otp_attributes_textSize, 32)
             spaceBetween = typedArray.getDimensionPixelSize(R.styleable.otp_attributes_spaceBetween, 32)
             typedArray.recycle()
@@ -71,18 +70,17 @@ class OtpView @JvmOverloads constructor(
                 val textParams = text.layoutParams as LinearLayout.LayoutParams
                     textParams.marginEnd = spaceBetween/2
                     textParams.marginStart = spaceBetween/2
-
-                /*
-                if (drawable != null)
-                    text.setBackgroundDrawable(drawable)
-                else {*/
-                    val tintColorStateList : ColorStateList = ColorStateList.valueOf(tintColor)
-                    text.supportBackgroundTintList = tintColorStateList
-                //}
+                val tintColorStateList : ColorStateList = ColorStateList.valueOf(tintColor)
+                text.supportBackgroundTintList = tintColorStateList
                 text.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
             }
         }
     }
+
+    /**
+     * Function to creates fields and add them to the linear layout, additionally adds each field into a list.
+     * It must be called before any other operation depending on the list mTexts
+     */
     private fun createFields(){
         var i = 0
         while(i < size){
@@ -94,36 +92,41 @@ class OtpView @JvmOverloads constructor(
     }
 
     /**
-     * Need mTexts before
+     * Function to focus next/previous field depending on the key pressed event additionally closes soft keyboard
      */
     private fun createFocusActions(){
         for(text:AppCompatEditText in mTexts){
-            text.setOnKeyListener(object: OnKeyListener{
-                override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-                    if(event?.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL){
-                        val nextText = mTexts.getOrNull(mTexts.indexOf(text)-1)
-                        nextText?.requestFocus()
-                    } else if(event?.action == KeyEvent.ACTION_DOWN) {
-                        val nextText = mTexts.getOrNull(mTexts.indexOf(text)+1)
-                        nextText?.requestFocus()
-                        if(text.text.isNotEmpty()){
-                            text.text =  SpannableStringBuilder("")
-                        }
+            text.setOnKeyListener { _, keyCode, event ->
+                if(event?.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL){
+                    val nextText = mTexts.getOrNull(mTexts.indexOf(text)-1)
+                    nextText?.requestFocus()
+                } else if(event?.action == KeyEvent.ACTION_DOWN) {
+                    val nextText = mTexts.getOrNull(mTexts.indexOf(text)+1)
+                    nextText?.requestFocus()
+                    if(text.text.isNotEmpty()){
+                        text.text =  SpannableStringBuilder("")
                     }
-                    return false
                 }
-            })
+                false
+            }
         }
     }
 
+    /**
+     * Helper function to close the softkeyboar within the current context
+     */
     private fun closeKeyboard(){
         val view = this
-        if (view != null) {
-            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view!!.getWindowToken(), 0)
-        }
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
-    open fun getCode() : String{
+
+    /**
+     * Function to retrieve the code from the fields
+     *
+     * @return The code as string
+     */
+    fun getCode() : String{
         var code = ""
         for(text:AppCompatEditText in mTexts){
             code += text.text
