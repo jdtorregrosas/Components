@@ -1,7 +1,9 @@
-# Banlinea Android Components
-This repo has a set of commonly used components through the android mobile applications
+# Android Components 
+This repo has a set of commonly used components through the android mobile applications.
+Everything made in Kotlin.
 
-## Components
-# [OtpView component](./banlinea.mobile.android.components/src/main/java/banlinea/mobile/components/otp/README.md)
+## Library
+### [Documentation](./banlinea.mobile.android.components/README.md)
 
-
+## Demo
+To run the demo clone the complete project and run the application
