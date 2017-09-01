@@ -97,16 +97,16 @@ class OtpView @JvmOverloads constructor(
 
         // Set options from attributes
         attrs?.let {
-            val typedArray = context.obtainStyledAttributes(it, R.styleable.otp_attributes, 0, 0)
-            mSize = typedArray.getInt(R.styleable.otp_attributes_size, 4)
-            mHint = typedArray.getString(R.styleable.otp_attributes_hint) ?: "*"
-            mTextColor = typedArray.getColor(R.styleable.otp_attributes_textColor, Color.BLACK)
-            mHintColor = typedArray.getColor(R.styleable.otp_attributes_hintColor, Color.GRAY)
-            mTintColor = typedArray.getColor(R.styleable.otp_attributes_tintColor, Color.MAGENTA)
-            mTextSize = typedArray.getDimensionPixelSize(R.styleable.otp_attributes_textSize, 32)
-            mSpaceBetween = typedArray.getDimensionPixelSize(R.styleable.otp_attributes_spaceBetween, 32)
-            mIsSmsEnabled = typedArray.getBoolean(R.styleable.otp_attributes_enableSms, false)
-            mSmsKeyWord = typedArray.getString(R.styleable.otp_attributes_smsKeyWord) ?: ""
+            val typedArray = context.obtainStyledAttributes(it, R.styleable.OtpView, 0, 0)
+            mSize = typedArray.getInt(R.styleable.OtpView_size, 4)
+            mHint = typedArray.getString(R.styleable.OtpView_hint) ?: "*"
+            mTextColor = typedArray.getColor(R.styleable.OtpView_textColor, Color.BLACK)
+            mHintColor = typedArray.getColor(R.styleable.OtpView_hintColor, Color.GRAY)
+            mTintColor = typedArray.getColor(R.styleable.OtpView_tintColor, Color.MAGENTA)
+            mTextSize = typedArray.getDimensionPixelSize(R.styleable.OtpView_textSize, 32)
+            mSpaceBetween = typedArray.getDimensionPixelSize(R.styleable.OtpView_spaceBetween, 32)
+            mIsSmsEnabled = typedArray.getBoolean(R.styleable.OtpView_enableSms, false)
+            mSmsKeyWord = typedArray.getString(R.styleable.OtpView_smsKeyWord) ?: ""
             typedArray.recycle()
 
             for(text:AppCompatEditText in mTexts){
