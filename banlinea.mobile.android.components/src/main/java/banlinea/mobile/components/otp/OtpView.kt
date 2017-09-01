@@ -77,8 +77,13 @@ class OtpView @JvmOverloads constructor(
                 if(word.matches(Regex("[0-9]+"))){
                     val splittedWord = word.split("")
                     (0..mSize).forEach {
-                        index -> mTexts[index].text = SpannableStringBuilder(splittedWord[index+1])
+                        index -> run{
+                            val nextText = mTexts.getOrNull(mTexts.indexOf(mTexts[index])+1)
+                            nextText?.requestFocus()
+                            mTexts[index].text = SpannableStringBuilder(splittedWord[index+1])
+                        }
                     }
+                    closeKeyboard()
                 }
             }
         }
@@ -159,8 +164,11 @@ class OtpView @JvmOverloads constructor(
         for(text:AppCompatEditText in mTexts){
             text.setOnKeyListener { _, keyCode, event ->
                 if(event?.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL){
-                    val nextText = mTexts.getOrNull(mTexts.indexOf(text)-1)
-                    nextText?.requestFocus()
+                    val lastText = mTexts.getOrNull(mTexts.indexOf(text)-1)
+                    lastText?.requestFocus()
+                    if(text.text.isNotEmpty()){
+                        text.text =  SpannableStringBuilder("")
+                    }
                 } else if(event?.action == KeyEvent.ACTION_DOWN) {
                     val nextText = mTexts.getOrNull(mTexts.indexOf(text)+1)
                     nextText?.requestFocus()
