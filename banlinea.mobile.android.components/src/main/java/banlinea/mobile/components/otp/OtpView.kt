@@ -19,7 +19,6 @@ import banlinea.mobile.components.R
 import android.text.SpannableStringBuilder
 import android.util.TypedValue
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 
 
 /**
@@ -37,28 +36,30 @@ class OtpView @JvmOverloads constructor(
 
     private val mTexts : MutableList<AppCompatEditText> = mutableListOf()
 
-    private var hint = "*"
-    private var size = 4
-    private var textColor : Int = Color.BLACK
-    private var hintColor : Int = Color.GRAY
-    private var tintColor : Int = Color.MAGENTA
-    private var textSize : Int = 0
-    private var spaceBetween : Int = 0
-    private var isSmsEnabled = false
-    private var smsKeyWord = ""
+    private var mHint = "*"
+    private var mSize = 4
+    private var mTextColor : Int = Color.BLACK
+    private var mHintColor : Int = Color.GRAY
+    private var mTintColor : Int = Color.MAGENTA
+    private var mTextSize : Int = 0
+    private var mSpaceBetween : Int = 0
+    private var mIsSmsEnabled = false
+    private var mSmsKeyWord = ""
+    private var mReceiverRegistered = false
 
-    private var smsReceiver = object : BroadcastReceiver(){
+    private var mSmsReceiver = object : BroadcastReceiver(){
+        @Suppress("DEPRECATION")
         override fun onReceive(ctx: Context?, i: Intent?) {
-            if (i?.action.equals("android.provider.Telephony.SMS_RECEIVED") && isSmsEnabled) {
+            if (i?.action.equals("android.provider.Telephony.SMS_RECEIVED") && mIsSmsEnabled) {
                 val bundle = i?.extras           //---get the SMS message passed in---
                 if (bundle != null) {
                     //---retrieve the SMS message received---
                     try {
                         val pdus = bundle.get("pdus") as Array<*>
-                        (0..pdus.size).forEach { i ->
-                            val msg = SmsMessage.createFromPdu(pdus[i] as ByteArray)
+                        (0..pdus.size).forEach { index ->
+                            val msg = SmsMessage.createFromPdu(pdus[index] as ByteArray)
                             val msgBody = msg.messageBody
-                            setCodeFromMessageWithKeyword(msgBody, smsKeyWord)
+                            setCodeFromMessageWithKeyword(msgBody, mSmsKeyWord)
                         }
                     } catch (e: Exception) {
                         //                            Log.d("Exception caught",e.getMessage());
@@ -68,7 +69,6 @@ class OtpView @JvmOverloads constructor(
             }
         }
     }
-    private var receiverRegistered = false
 
     private fun setCodeFromMessageWithKeyword(msgBody:String, keyWord: String){
         if(msgBody.toLowerCase().contains(keyWord.toLowerCase())){
@@ -76,7 +76,7 @@ class OtpView @JvmOverloads constructor(
             splittedBody.forEach { word ->
                 if(word.matches(Regex("[0-9]+"))){
                     val splittedWord = word.split("")
-                    (0..size).forEach {
+                    (0..mSize).forEach {
                         index -> mTexts[index].text = SpannableStringBuilder(splittedWord[index+1])
                     }
                 }
@@ -93,15 +93,15 @@ class OtpView @JvmOverloads constructor(
         // Set options from attributes
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.otp_attributes, 0, 0)
-            size = typedArray.getInt(R.styleable.otp_attributes_size, 4)
-            hint = typedArray.getString(R.styleable.otp_attributes_hint) ?: "*"
-            textColor = typedArray.getColor(R.styleable.otp_attributes_textColor, Color.BLACK)
-            hintColor = typedArray.getColor(R.styleable.otp_attributes_hintColor, Color.GRAY)
-            tintColor = typedArray.getColor(R.styleable.otp_attributes_tintColor, Color.MAGENTA)
-            textSize = typedArray.getDimensionPixelSize(R.styleable.otp_attributes_textSize, 32)
-            spaceBetween = typedArray.getDimensionPixelSize(R.styleable.otp_attributes_spaceBetween, 32)
-            isSmsEnabled = typedArray.getBoolean(R.styleable.otp_attributes_enableSms, false)
-            smsKeyWord = typedArray.getString(R.styleable.otp_attributes_smsKeyWord) ?: ""
+            mSize = typedArray.getInt(R.styleable.otp_attributes_size, 4)
+            mHint = typedArray.getString(R.styleable.otp_attributes_hint) ?: "*"
+            mTextColor = typedArray.getColor(R.styleable.otp_attributes_textColor, Color.BLACK)
+            mHintColor = typedArray.getColor(R.styleable.otp_attributes_hintColor, Color.GRAY)
+            mTintColor = typedArray.getColor(R.styleable.otp_attributes_tintColor, Color.MAGENTA)
+            mTextSize = typedArray.getDimensionPixelSize(R.styleable.otp_attributes_textSize, 32)
+            mSpaceBetween = typedArray.getDimensionPixelSize(R.styleable.otp_attributes_spaceBetween, 32)
+            mIsSmsEnabled = typedArray.getBoolean(R.styleable.otp_attributes_enableSms, false)
+            mSmsKeyWord = typedArray.getString(R.styleable.otp_attributes_smsKeyWord) ?: ""
             typedArray.recycle()
 
             for(text:AppCompatEditText in mTexts){
@@ -109,15 +109,15 @@ class OtpView @JvmOverloads constructor(
                 text.textAlignment = View.TEXT_ALIGNMENT_CENTER
                 text.inputType = InputType.TYPE_CLASS_NUMBER
                 text.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(1))
-                text.hint = hint
-                text.setTextColor(textColor)
-                text.setHintTextColor(hintColor)
+                text.hint = mHint
+                text.setTextColor(mTextColor)
+                text.setHintTextColor(mHintColor)
                 val textParams = text.layoutParams as LinearLayout.LayoutParams
-                    textParams.marginEnd = spaceBetween/2
-                    textParams.marginStart = spaceBetween/2
-                val tintColorStateList : ColorStateList = ColorStateList.valueOf(tintColor)
+                    textParams.marginEnd = mSpaceBetween/2
+                    textParams.marginStart = mSpaceBetween/2
+                val tintColorStateList : ColorStateList = ColorStateList.valueOf(mTintColor)
                 text.supportBackgroundTintList = tintColorStateList
-                text.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
+                text.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize.toFloat())
             }
         }
     }
@@ -126,14 +126,14 @@ class OtpView @JvmOverloads constructor(
         val filter = IntentFilter()
         filter.addAction("android.provider.Telephony.SMS_RECEIVED")
         filter.priority =  Int.MAX_VALUE
-        ctx.registerReceiver(smsReceiver, filter)
-        receiverRegistered = true
+        ctx.registerReceiver(mSmsReceiver, filter)
+        mReceiverRegistered = true
     }
 
     fun unregisterReceiver(ctx: Context){
-        if (receiverRegistered) {
-            ctx.unregisterReceiver(smsReceiver)
-            receiverRegistered = false
+        if (mReceiverRegistered) {
+            ctx.unregisterReceiver(mSmsReceiver)
+            mReceiverRegistered = false
         }
     }
 
@@ -144,7 +144,7 @@ class OtpView @JvmOverloads constructor(
      */
     private fun createFields(){
         var i = 0
-        while(i < size){
+        while(i < mSize){
             val text = AppCompatEditText(context)
             addView(text)
             mTexts.add(text)
