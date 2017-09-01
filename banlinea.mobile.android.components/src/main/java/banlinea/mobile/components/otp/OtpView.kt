@@ -72,15 +72,15 @@ class OtpView @JvmOverloads constructor(
 
     private fun setCodeFromMessageWithKeyword(msgBody:String, keyWord: String){
         if(msgBody.toLowerCase().contains(keyWord.toLowerCase())){
-            val splittedBody = msgBody.split(" ")
-            splittedBody.forEach { word ->
+            val splitBody = msgBody.split(" ")
+            splitBody.forEach { word ->
                 if(word.matches(Regex("[0-9]+"))){
-                    val splittedWord = word.split("")
+                    val splitWord = word.split("")
                     (0..mSize).forEach {
                         index -> run{
                             val nextText = mTexts.getOrNull(mTexts.indexOf(mTexts[index])+1)
                             nextText?.requestFocus()
-                            mTexts[index].text = SpannableStringBuilder(splittedWord[index+1])
+                            mTexts[index].text = SpannableStringBuilder(splitWord[index+1])
                         }
                     }
                     closeKeyboard()
