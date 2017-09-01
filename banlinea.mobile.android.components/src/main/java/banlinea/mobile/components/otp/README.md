@@ -41,5 +41,6 @@ The table explains each attribute:
 
 3. Customize what you need with the custom attributes
 4. Enjoy!
-
+5. <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+   <uses-permission android:name="android.permission.READ_SMS" />
 

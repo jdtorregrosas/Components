@@ -1,10 +1,14 @@
 package banlinea.mobile.components.otp
 
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.support.v7.widget.AppCompatEditText
+import android.telephony.SmsMessage
 import android.text.InputFilter
 import android.text.InputType
 import android.util.AttributeSet
@@ -15,6 +19,7 @@ import banlinea.mobile.components.R
 import android.text.SpannableStringBuilder
 import android.util.TypedValue
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 
 
 /**
@@ -39,7 +44,45 @@ class OtpView @JvmOverloads constructor(
     private var tintColor : Int = Color.MAGENTA
     private var textSize : Int = 0
     private var spaceBetween : Int = 0
+    private var isSmsEnabled = false
+    private var smsKeyWord = ""
 
+    private var smsReceiver = object : BroadcastReceiver(){
+        override fun onReceive(ctx: Context?, i: Intent?) {
+            if (i?.action.equals("android.provider.Telephony.SMS_RECEIVED") && isSmsEnabled) {
+                val bundle = i?.extras           //---get the SMS message passed in---
+                if (bundle != null) {
+                    //---retrieve the SMS message received---
+                    try {
+                        val pdus = bundle.get("pdus") as Array<*>
+                        (0..pdus.size).forEach { i ->
+                            val msg = SmsMessage.createFromPdu(pdus[i] as ByteArray)
+                            val msgBody = msg.messageBody
+                            setCodeFromMessageWithKeyword(msgBody, smsKeyWord)
+                        }
+                    } catch (e: Exception) {
+                        //                            Log.d("Exception caught",e.getMessage());
+                    }
+
+                }
+            }
+        }
+    }
+    private var receiverRegistered = false
+
+    private fun setCodeFromMessageWithKeyword(msgBody:String, keyWord: String){
+        if(msgBody.toLowerCase().contains(keyWord.toLowerCase())){
+            val splittedBody = msgBody.split(" ")
+            splittedBody.forEach { word ->
+                if(word.matches(Regex("[0-9]+"))){
+                    val splittedWord = word.split("")
+                    (0..size).forEach {
+                        index -> mTexts[index].text = SpannableStringBuilder(splittedWord[index+1])
+                    }
+                }
+            }
+        }
+    }
     init {
         // Create fields and configure layout
         createFields()
@@ -57,6 +100,8 @@ class OtpView @JvmOverloads constructor(
             tintColor = typedArray.getColor(R.styleable.otp_attributes_tintColor, Color.MAGENTA)
             textSize = typedArray.getDimensionPixelSize(R.styleable.otp_attributes_textSize, 32)
             spaceBetween = typedArray.getDimensionPixelSize(R.styleable.otp_attributes_spaceBetween, 32)
+            isSmsEnabled = typedArray.getBoolean(R.styleable.otp_attributes_enableSms, false)
+            smsKeyWord = typedArray.getString(R.styleable.otp_attributes_smsKeyWord) ?: ""
             typedArray.recycle()
 
             for(text:AppCompatEditText in mTexts){
@@ -76,6 +121,22 @@ class OtpView @JvmOverloads constructor(
             }
         }
     }
+
+    fun registerReceiver(ctx: Context){
+        val filter = IntentFilter()
+        filter.addAction("android.provider.Telephony.SMS_RECEIVED")
+        filter.priority =  Int.MAX_VALUE
+        ctx.registerReceiver(smsReceiver, filter)
+        receiverRegistered = true
+    }
+
+    fun unregisterReceiver(ctx: Context){
+        if (receiverRegistered) {
+            ctx.unregisterReceiver(smsReceiver)
+            receiverRegistered = false
+        }
+    }
+
 
     /**
      * Function to creates fields and add them to the linear layout, additionally adds each field into a list.
@@ -113,7 +174,7 @@ class OtpView @JvmOverloads constructor(
     }
 
     /**
-     * Helper function to close the softkeyboar within the current context
+     * Helper function to close the soft keyboard within the current context
      */
     private fun closeKeyboard(){
         val view = this

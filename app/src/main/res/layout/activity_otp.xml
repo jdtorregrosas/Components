@@ -27,6 +27,8 @@
         otp:textColor="#ff00ff"
         otp:textSize="20sp"
         otp:tintColor="#aa0"
+        otp:enableSms="true"
+        otp:smsKeyWord="Ualet"
         tools:layout_editor_absoluteX="32dp"
         tools:layout_editor_absoluteY="8dp" />
 

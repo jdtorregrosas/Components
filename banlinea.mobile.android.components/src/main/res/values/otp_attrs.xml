@@ -8,5 +8,7 @@
         <attr name="tintColor" format="color" />
         <attr name="spaceBetween" format="dimension" />
         <attr name="textSize" format="dimension" />
+        <attr name="smsKeyWord" format="string" />
+        <attr name="enableSms" format="boolean" />
     </declare-styleable>
 </resources>
