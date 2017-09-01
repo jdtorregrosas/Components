@@ -42,6 +42,7 @@ The table explains each attribute:
 
 3. Customize what you need with the custom attributes
 4. If you'll use autofill you must to register the receiver and unregister it like this:
+
 (Kotlin)
 ```kotlin
         override fun onCreate(savedInstanceState: Bundle?) {
