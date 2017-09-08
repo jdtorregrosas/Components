@@ -1,8 +1,6 @@
 package banlinea.mobile.components.questionsList
 
-import android.R
 import android.content.Context
-import android.support.v7.widget.AppCompatButton
 import android.support.v7.widget.AppCompatEditText
 import android.support.v7.widget.AppCompatTextView
 import android.text.Editable
@@ -15,6 +13,7 @@ import banlinea.mobile.components.questionsList.models.QuestionType
 
 /**
  * Created by julian on 7/09/17.
+ * Question is a private component
  */
 class Question(context: Context, type: QuestionType, labels: List<String>, answers: List<Answer> = listOf()) {
 
@@ -43,7 +42,7 @@ class Question(context: Context, type: QuestionType, labels: List<String>, answe
             }
             QuestionType.CLOSED -> {
                 val spinner = Spinner(context)
-                spinner.adapter = ArrayAdapter(context, R.layout.simple_spinner_dropdown_item, answers.map { it.value })
+                spinner.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, answers.map { it.value })
                 spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
                     override fun onNothingSelected(p0: AdapterView<*>?) {
                         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
