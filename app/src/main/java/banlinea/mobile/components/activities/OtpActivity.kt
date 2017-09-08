@@ -1,10 +1,14 @@
-package banlinea.mobile.components
+package banlinea.mobile.components.activities
 
 import android.Manifest
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
+import android.widget.Toolbar
+import banlinea.mobile.components.R
 import kotlinx.android.synthetic.main.activity_otp.*
+import kotlinx.android.synthetic.main.toolbar.*
+import org.jetbrains.anko.alert
 
 class OtpActivity : AppCompatActivity() {
 
@@ -12,6 +16,11 @@ class OtpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otp)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = "Otp Component"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener{ _ -> onBackPressed()}
 
         otpShowCode.setOnClickListener{
             _ -> showCode()
@@ -30,7 +39,7 @@ class OtpActivity : AppCompatActivity() {
     }
 
     private fun showCode(){
-        otpCode.text = otpView.getCode()
+        alert("Your code is ${otpView.getCode()}") {  }.show()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

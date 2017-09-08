@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/banlinea.mobile.android.components.iml" filepath="$PROJECT_DIR$/banlinea.mobile.android.components.iml" />
       <module fileurl="file://$PROJECT_DIR$/banlinea.mobile.android.components/banlinea.mobile.android.components.iml" filepath="$PROJECT_DIR$/banlinea.mobile.android.components/banlinea.mobile.android.components.iml" />
+      <module fileurl="file://$PROJECT_DIR$/banlinea.mobile.android.components/banlinea.mobile.android.components-banlinea.mobile.android.components.iml" filepath="$PROJECT_DIR$/banlinea.mobile.android.components/banlinea.mobile.android.components-banlinea.mobile.android.components.iml" />
       <module fileurl="file://$PROJECT_DIR$/components.iml" filepath="$PROJECT_DIR$/components.iml" />
     </modules>
   </component>
