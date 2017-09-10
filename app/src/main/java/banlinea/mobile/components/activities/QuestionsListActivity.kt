@@ -22,33 +22,16 @@ class QuestionsListActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener{ _ -> onBackPressed()}
         val questions = mutableListOf<Question>()
-        questions.add(Question(mContext, QuestionType.CLOSED, listOf("De qué color son los elefantes"),
-                listOf(Answer(1, "Rosados"), Answer(2, "Verdes"), Answer(3, "Amarillos"))))
-        questions.add(Question(mContext, QuestionType.OPEN, listOf("Cuál es tu fruta ciudad 2")))
-        questions.add(Question(mContext, QuestionType.OPEN, listOf("Cuál es tu edad refrutera?")))
-        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Cuál es tu fruta ciudad 2"),
-                listOf(Answer(1, "Pogotá"), Answer(2, "Metrellín"))))
-        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Cuál es tu fruta ciudad 2"),
-                listOf(Answer(1, "Pogotá"), Answer(2, "Metrellín"))))
-        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Cuál es tu fruta ciudad 2"),
-                listOf(Answer(1, "Pogotá"), Answer(2, "Metrellín"))))
-        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Cuál es tu fruta ciudad 2"),
-                listOf(Answer(1, "Pogotá"), Answer(2, "Metrellín"))))
-        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Cuál es tu fruta ciudad 2"),
-                listOf(Answer(1, "Pogotá"), Answer(2, "Metrellín"))))
-        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Cuál es tu fruta ciudad 2"),
-                listOf(Answer(1, "Pogotá"), Answer(2, "Metrellín"))))
-        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Cuál es tu fruta ciudad 2"),
-                listOf(Answer(1, "Pogotá"), Answer(2, "Metrellín"))))
-        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Cuál es tu fruta ciudad 2"),
-                listOf(Answer(1, "Pogotá"), Answer(2, "Metrellín"))))
-        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Cuál es tu fruta ciudad 2"),
-                listOf(Answer(1, "Pogotá"), Answer(2, "Metrellín"))))
-        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Cuál es tu fruta ciudad 2"),
-                listOf(Answer(1, "Pogotá"), Answer(2, "Metrellín"))))
-        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Cuál es tu fruta ciudad 2"),
-                listOf(Answer(1, "Pogotá"), Answer(2, "Metrellín"))))
-
+        questions.add(Question(mContext, QuestionType.OPEN, listOf("Are you feeling better today?")))
+        questions.add(Question(mContext, QuestionType.CLOSED, listOf("What colour shirt are you wearing?"),
+                listOf(Answer(1, "Red"), Answer(2, "Green"), Answer(3, "Blue"))))
+        questions.add(Question(mContext, QuestionType.OPEN, listOf("Do you like this?")))
+        questions.add(Question(mContext, QuestionType.OPEN, listOf("Do you get on well with your boss?")))
+        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Where do you live?"),
+                listOf(Answer(1, "Bogotá"), Answer(2, "Berlin"))))
+        questions.add(Question(mContext, QuestionType.OPEN, listOf("Who will you vote for this election?")))
+        questions.add(Question(mContext, QuestionType.CLOSED, listOf("Which food do you prefer?"),
+                listOf(Answer(1, "Tomatoes"), Answer(2, "Pasta"), Answer(3, "Tuna"), Answer(2, "Fried chips"))))
         questionsListView.setQuestions(questions)
     }
 }
