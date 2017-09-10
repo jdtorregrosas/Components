@@ -11,17 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="banlinea.mobile.components.activities.QuestionsListActivity">
-        <LinearLayout
-            android:id="@+id/testFrame"
+        <banlinea.mobile.components.questionsList.QuestionsListView
+            android:id="@+id/questionsListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-        <Button
-            android:id="@+id/testButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Test"/>
-        </LinearLayout>
+            android:layout_height="match_parent">
+
+        </banlinea.mobile.components.questionsList.QuestionsListView>
 
     </android.support.constraint.ConstraintLayout>
 </LinearLayout>

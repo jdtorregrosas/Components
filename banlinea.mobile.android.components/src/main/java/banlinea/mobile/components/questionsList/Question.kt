@@ -18,11 +18,13 @@ import banlinea.mobile.components.questionsList.models.QuestionType
 class Question(context: Context, type: QuestionType, labels: List<String>, answers: List<Answer> = listOf()) {
 
     private val linearLayout = LinearLayout(context)
-    private lateinit var finalAnswer : Answer
+    private var finalAnswer : Answer? = null
+    private var isDone = false
 
     init {
         linearLayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         linearLayout.orientation = LinearLayout.VERTICAL
+        // TODO Use random label or something when there are two or more
         val label = AppCompatTextView(context)
         label.text = labels[0]
         linearLayout.addView(label)
@@ -30,28 +32,26 @@ class Question(context: Context, type: QuestionType, labels: List<String>, answe
         when(type){
             QuestionType.OPEN -> {
                 val answerEditText = AppCompatEditText(context)
-                linearLayout.addView(answerEditText)
                 answerEditText.inputType = InputType.TYPE_CLASS_TEXT
                 answerEditText.addTextChangedListener(object: TextWatcher{
                     override fun afterTextChanged(p0: Editable?) {}
                     override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
                     override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
                         finalAnswer = Answer(1, text.toString())
+                        isDone = true
                     }
                 })
+                linearLayout.addView(answerEditText)
             }
             QuestionType.CLOSED -> {
                 val spinner = Spinner(context)
                 spinner.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, answers.map { it.value })
                 spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-                    override fun onNothingSelected(p0: AdapterView<*>?) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                    }
-
+                    override fun onNothingSelected(p0: AdapterView<*>?) {}
                     override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
                         finalAnswer = answers[position]
+                        isDone = true
                     }
-
                 }
                 linearLayout.addView(spinner)
             }
@@ -62,7 +62,11 @@ class Question(context: Context, type: QuestionType, labels: List<String>, answe
         return linearLayout
     }
 
-    fun getAnswer() : Answer {
+    fun getAnswer() : Answer? {
         return finalAnswer
+    }
+
+    fun isDone() : Boolean {
+        return isDone
     }
 }
