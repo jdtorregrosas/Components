@@ -21,6 +21,7 @@ class QuestionsListView @JvmOverloads constructor(
         val linearLayout = LinearLayout(context)
         linearLayout.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         linearLayout.orientation = LinearLayout.VERTICAL
+        linearLayout.setPadding(40,40,40,40)
         for(question in questions){
             linearLayout.addView(question.getView())
         }

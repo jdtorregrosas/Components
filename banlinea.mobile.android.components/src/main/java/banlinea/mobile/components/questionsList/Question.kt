@@ -24,6 +24,7 @@ class Question(context: Context, type: QuestionType, labels: List<String>, answe
     init {
         linearLayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         linearLayout.orientation = LinearLayout.VERTICAL
+        linearLayout.setPadding(0,15,0,15)
         // TODO Use random label or something when there are two or more
         val label = AppCompatTextView(context)
         label.text = labels[0]
