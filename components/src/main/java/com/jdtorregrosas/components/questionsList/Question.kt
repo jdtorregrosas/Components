@@ -15,7 +15,7 @@ import com.jdtorregrosas.components.questionsList.models.QuestionType
  * Created by julian on 7/09/17.
  * Question is a private component
  */
-class Question(context: Context, type: QuestionType, labels: List<String>, answers: List<Answer> = listOf()) {
+class Question(context: Context, type: QuestionType, labels: List<String>, answers: MutableList<Answer> = mutableListOf(), spinnerPlaceholder: String = "Select an answer") {
 
     private val linearLayout = LinearLayout(context)
     private var finalAnswer : Answer? = null
@@ -35,6 +35,7 @@ class Question(context: Context, type: QuestionType, labels: List<String>, answe
             QuestionType.OPEN -> {
                 val answerEditText = AppCompatEditText(context)
                 answerEditText.inputType = InputType.TYPE_CLASS_TEXT
+
                 answerEditText.addTextChangedListener(object: TextWatcher{
                     override fun afterTextChanged(p0: Editable?) {}
                     override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -48,13 +49,16 @@ class Question(context: Context, type: QuestionType, labels: List<String>, answe
             }
             QuestionType.CLOSED -> {
                 val spinner = Spinner(context)
+                answers.add(0, Answer(0, spinnerPlaceholder))
                 spinner.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, answers.map { it.value })
                 spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
                     override fun onNothingSelected(p0: AdapterView<*>?) {}
                     override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
-                        finalAnswer = answers[position]
-                        onAnsweredListener()
-                        isDone = true
+                        if(position != 0) {
+                            finalAnswer = answers[position]
+                            onAnsweredListener()
+                            isDone = true
+                        }
                     }
                 }
                 linearLayout.addView(spinner)

@@ -44,6 +44,7 @@ class QuestionsListView @JvmOverloads constructor(
         (0 until questions.size-1)
                 .filter { questions[it] === question }
                 .forEach { questions[it +1].getView().visibility = View.VISIBLE }
+        this.post{ this.scrollTo(0, this.bottom) }
     }
 
     private fun setOnAnsweredListeners(questions: List<Question>){
