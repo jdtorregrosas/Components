@@ -6,17 +6,16 @@
     android:orientation="vertical">
     <include layout="@layout/toolbar"/>
     <android.support.constraint.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="banlinea.mobile.components.activities.QuestionsListActivity">
-        <banlinea.mobile.components.questionsList.QuestionsListView
+        tools:context="banlinea.mobile.components.com.jdtorregrosas.components.activities.QuestionsListActivity">
+        <com.jdtorregrosas.components.questionsList.QuestionsListView
             android:id="@+id/questionsListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </banlinea.mobile.components.questionsList.QuestionsListView>
+        </com.jdtorregrosas.components.questionsList.QuestionsListView>
 
     </android.support.constraint.ConstraintLayout>
 </LinearLayout>

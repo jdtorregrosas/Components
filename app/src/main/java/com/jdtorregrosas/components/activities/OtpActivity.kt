@@ -1,4 +1,4 @@
-package banlinea.mobile.components.activities
+package com.jdtorregrosas.components.activities
 
 import android.Manifest
 import android.support.v7.app.AppCompatActivity

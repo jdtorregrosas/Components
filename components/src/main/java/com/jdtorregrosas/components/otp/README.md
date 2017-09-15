@@ -14,7 +14,7 @@ Easy capturing OTP codes of n digits with the selected customization
 1. Import the library component (see library README)
 2. Create the component view on the XML file as follows:
 ```xml
-    <banlinea.mobile.components.otp.OtpView xmlns:otp="http://schemas.android.com/apk/res-auto"
+    <com.jdtorregrosas.components.otp.OtpView xmlns:otp="http://schemas.android.com/apk/res-auto"
         otp:hint="|"
         otp:hintColor="#eeaaee"
         otp:size="4"

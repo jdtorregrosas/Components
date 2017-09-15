@@ -1,4 +1,4 @@
-package banlinea.mobile.components;
+package com.jdtorregrosas.components;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,12 +1,12 @@
-package banlinea.mobile.components.activities
+package com.jdtorregrosas.components.activities
 
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import banlinea.mobile.components.R
-import banlinea.mobile.components.questionsList.Question
-import banlinea.mobile.components.questionsList.models.Answer
-import banlinea.mobile.components.questionsList.models.QuestionType
+import com.jdtorregrosas.components.questionsList.Question
+import com.jdtorregrosas.components.questionsList.models.Answer
+import com.jdtorregrosas.components.questionsList.models.QuestionType
 import kotlinx.android.synthetic.main.activity_questions_list.*
 import kotlinx.android.synthetic.main.toolbar.*
 

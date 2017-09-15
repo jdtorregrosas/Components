@@ -1,4 +1,4 @@
-package banlinea.mobile.components.questionsList.models
+package com.jdtorregrosas.components.questionsList.models
 
 /**
  * Created by julian on 7/09/17.

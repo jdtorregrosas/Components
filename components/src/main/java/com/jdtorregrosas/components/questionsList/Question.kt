@@ -1,4 +1,4 @@
-package banlinea.mobile.components.questionsList
+package com.jdtorregrosas.components.questionsList
 
 import android.content.Context
 import android.support.v7.widget.AppCompatEditText
@@ -8,8 +8,8 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.view.View
 import android.widget.*
-import banlinea.mobile.components.questionsList.models.Answer
-import banlinea.mobile.components.questionsList.models.QuestionType
+import com.jdtorregrosas.components.questionsList.models.Answer
+import com.jdtorregrosas.components.questionsList.models.QuestionType
 
 /**
  * Created by julian on 7/09/17.

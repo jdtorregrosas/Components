@@ -1,4 +1,4 @@
-package banlinea.mobile.components.otp
+package com.jdtorregrosas.components.otp
 
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver

@@ -1,4 +1,4 @@
-package banlinea.mobile.components.questionsList
+package com.jdtorregrosas.components.questionsList
 
 import android.content.Context
 import android.util.AttributeSet

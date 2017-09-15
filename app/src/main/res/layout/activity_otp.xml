@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="banlinea.mobile.components.activities.OtpActivity"
+    tools:context="com.jdtorregrosas.components.activities.OtpActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="25dp">
 
@@ -14,7 +14,7 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
-    <banlinea.mobile.components.otp.OtpView xmlns:otp="http://schemas.android.com/apk/res-auto"
+    <com.jdtorregrosas.components.otp.OtpView xmlns:otp="http://schemas.android.com/apk/res-auto"
         android:id="@+id/otpView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

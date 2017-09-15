@@ -1,4 +1,4 @@
-package banlinea.mobile.components;
+package com.jdtorregrosas.components;
 
 import org.junit.Test;
 

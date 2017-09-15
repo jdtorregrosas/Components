@@ -1,4 +1,4 @@
-package banlinea.mobile.components.activities
+package com.jdtorregrosas.components.activities
 
 import android.content.Context
 import android.content.Intent

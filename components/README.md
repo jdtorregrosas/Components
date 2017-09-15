@@ -3,7 +3,8 @@ This repo has a set of commonly used components through the android mobile appli
 Everything made in Kotlin.
 
 ## Components
-### 1. [OtpView component](./src/main/java/banlinea/mobile/components/otp/README.md)
+### 1. [OtpView component](./src/main/java/com/jdtorregrosas/components/otp/README.md)
+### 2. [QuestionsListView component](./src/main/java/com/jdtorregrosas/components/questionsList/README.md)
 
 
 ## How to use it
