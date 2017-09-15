@@ -1,7 +1,7 @@
 # OtpView Component
 Easy capturing OTP codes of n digits with the selected customization
 
-![otp gif preview](./otpGif.gif)
+![otp gif preview](./otp.gif)
 ## Customization
 - Text color
 - Text size
