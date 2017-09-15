@@ -36,6 +36,19 @@ class QuestionsListView @JvmOverloads constructor(
             linearLayout.addView(questions[i].getView())
             if(showNextAfterCompletion && i!=0) questions[i].getView().visibility = View.GONE
         }
+        if(showNextAfterCompletion) setOnAnsweredListeners(questions)
         this.addView(linearLayout)
+    }
+
+    private fun showNextQuestion(questions: List<Question>, question: Question){
+        (0 until questions.size-1)
+                .filter { questions[it] === question }
+                .forEach { questions[it +1].getView().visibility = View.VISIBLE }
+    }
+
+    private fun setOnAnsweredListeners(questions: List<Question>){
+        for(question in questions){
+            question.setOnAnsweredListener { showNextQuestion(questions, question) }
+        }
     }
 }

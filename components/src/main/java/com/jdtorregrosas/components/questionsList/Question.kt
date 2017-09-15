@@ -20,6 +20,7 @@ class Question(context: Context, type: QuestionType, labels: List<String>, answe
     private val linearLayout = LinearLayout(context)
     private var finalAnswer : Answer? = null
     private var isDone = false
+    private var onAnsweredListener : () -> Unit = {}
 
     init {
         linearLayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -39,6 +40,7 @@ class Question(context: Context, type: QuestionType, labels: List<String>, answe
                     override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
                     override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
                         finalAnswer = Answer(1, text.toString())
+                        onAnsweredListener()
                         isDone = true
                     }
                 })
@@ -51,6 +53,7 @@ class Question(context: Context, type: QuestionType, labels: List<String>, answe
                     override fun onNothingSelected(p0: AdapterView<*>?) {}
                     override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
                         finalAnswer = answers[position]
+                        onAnsweredListener()
                         isDone = true
                     }
                 }
@@ -61,6 +64,10 @@ class Question(context: Context, type: QuestionType, labels: List<String>, answe
 
     fun getView() : LinearLayout{
         return linearLayout
+    }
+
+    fun setOnAnsweredListener(listener: () -> Unit){
+        onAnsweredListener = listener
     }
 
     fun getAnswer() : Answer? {
