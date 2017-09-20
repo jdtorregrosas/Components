@@ -24,14 +24,14 @@ class QuestionsListActivity : AppCompatActivity() {
         val questions = mutableListOf<Question>()
         questions.add(Question(mContext, QuestionType.OPEN, listOf("Are you feeling better today?")))
         questions.add(Question(mContext, QuestionType.CLOSED, listOf("What colour shirt are you wearing?"),
-                listOf(Answer(1, "Red"), Answer(2, "Green"), Answer(3, "Blue"))))
+                mutableListOf(Answer(1, "Red"), Answer(2, "Green"), Answer(3, "Blue")), "select a color"))
         questions.add(Question(mContext, QuestionType.OPEN, listOf("Do you like this?")))
         questions.add(Question(mContext, QuestionType.OPEN, listOf("Do you get on well with your boss?")))
         questions.add(Question(mContext, QuestionType.CLOSED, listOf("Where do you live?"),
-                listOf(Answer(1, "Bogotá"), Answer(2, "Berlin"))))
+                mutableListOf(Answer(1, "Bogotá"), Answer(2, "Berlin"))))
         questions.add(Question(mContext, QuestionType.OPEN, listOf("Who will you vote for this election?")))
         questions.add(Question(mContext, QuestionType.CLOSED, listOf("Which food do you prefer?"),
-                listOf(Answer(1, "Tomatoes"), Answer(2, "Pasta"), Answer(3, "Tuna"), Answer(2, "Fried chips"))))
+                mutableListOf(Answer(1, "Tomatoes"), Answer(2, "Pasta"), Answer(3, "Tuna"), Answer(2, "Fried chips"))))
         questionsListView.setQuestions(questions)
     }
 }
