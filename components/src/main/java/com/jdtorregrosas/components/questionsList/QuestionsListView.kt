@@ -18,12 +18,16 @@ class QuestionsListView @JvmOverloads constructor(
 ) : ScrollView(context, attrs, defStyle, defStyleRes) {
 
     private var showNextAfterCompletion = false
+    private var errorMessage = ""
+    private var mandatoryAnswers = false
     init {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
 
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.QuestionsListView, 0, 0)
             showNextAfterCompletion = typedArray.getBoolean(R.styleable.QuestionsListView_showNextAfterCompletion, false)
+            mandatoryAnswers = typedArray.getBoolean(R.styleable.QuestionsListView_mandatoryAnswers, false)
+            errorMessage = typedArray.getString(R.styleable.QuestionsListView_errorMessage) ?: ""
             typedArray.recycle()
         }
     }
@@ -32,9 +36,19 @@ class QuestionsListView @JvmOverloads constructor(
         linearLayout.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         linearLayout.orientation = LinearLayout.VERTICAL
         linearLayout.setPadding(40,40,40,40)
+        if(mandatoryAnswers){
+            for(i in 0 until questions.size){
+                questions[i].isMandatory = true
+                if(!errorMessage.isNullOrBlank()){
+                    questions[i].errorMessage = errorMessage
+                }
+            }
+        }
         for(i in 0 until questions.size){
-            linearLayout.addView(questions[i].getView())
+            questions[i].createQuestion()
             if(showNextAfterCompletion && i!=0) questions[i].getView().visibility = View.GONE
+            linearLayout.addView(questions[i].getView())
+
         }
         if(showNextAfterCompletion) setOnAnsweredListeners(questions)
         this.addView(linearLayout)
