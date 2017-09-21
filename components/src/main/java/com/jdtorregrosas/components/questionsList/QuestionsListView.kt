@@ -10,6 +10,7 @@ import com.jdtorregrosas.components.questionsList.models.Answer
 
 /**
  * Created by jdtor on 09.09.2017 for components.
+ * QuestionsListView component extends from ScrollView
  */
 class QuestionsListView @JvmOverloads constructor(
         context: Context,
@@ -41,7 +42,7 @@ class QuestionsListView @JvmOverloads constructor(
         if(mandatoryAnswers){
             for(i in 0 until questions.size){
                 questions[i].isMandatory = true
-                if(!errorMessage.isNullOrBlank()){
+                if(!errorMessage.isBlank()){
                     questions[i].errorMessage = errorMessage
                 }
             }
@@ -71,7 +72,7 @@ class QuestionsListView @JvmOverloads constructor(
     }
 
     fun getAnswers() : List<Answer>{
-        var answers = mutableListOf<Answer>()
+        val answers = mutableListOf<Answer>()
         if(questions.isNotEmpty()){
             for(question in questions){
                 if(question.isAnswered()){

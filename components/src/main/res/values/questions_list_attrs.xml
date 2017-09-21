@@ -2,7 +2,6 @@
 <resources>
     <declare-styleable name="QuestionsListView">
         <attr name="showNextAfterCompletion" format="boolean" />
-        <attr name="pickerPlaceholder" format="string" />
         <attr name="mandatoryAnswers" format="boolean" />
         <attr name="errorMessage" format="string" />
     </declare-styleable>

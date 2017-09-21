@@ -22,7 +22,7 @@ class QuestionsListActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener{ _ -> onBackPressed()}
         val questions = mutableListOf<Question>()
-        questions.add(Question(mContext, QuestionType.OPEN, listOf("Are you feeling better today?")))
+        questions.add(Question(mContext, QuestionType.OPEN, listOf("Are you feeling better today?"), isMandatory = true, errorMessage = "My error Message"))
         questions.add(Question(mContext, QuestionType.CLOSED, listOf("What colour shirt are you wearing?"),
                 mutableListOf(Answer(1, "Red"), Answer(2, "Green"), Answer(3, "Blue")), "select a color"))
         questions.add(Question(mContext, QuestionType.OPEN, listOf("Do you like this?")))
