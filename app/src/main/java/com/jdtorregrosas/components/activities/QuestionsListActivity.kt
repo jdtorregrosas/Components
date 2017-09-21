@@ -33,5 +33,11 @@ class QuestionsListActivity : AppCompatActivity() {
         questions.add(Question(mContext, QuestionType.CLOSED, listOf("Which food do you prefer?"),
                 mutableListOf(Answer(1, "Tomatoes"), Answer(2, "Pasta"), Answer(3, "Tuna"), Answer(2, "Fried chips"))))
         questionsListView.setQuestions(questions)
+
+        questionsListViewButtonLog.setOnClickListener{
+            _ -> questionsListView.getAnswers().map {
+                println("${it.number} ${it.value}")
+            }
+        }
     }
 }

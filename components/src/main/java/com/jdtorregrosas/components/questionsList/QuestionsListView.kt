@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import banlinea.mobile.components.R
+import com.jdtorregrosas.components.questionsList.models.Answer
 
 /**
  * Created by jdtor on 09.09.2017 for components.
@@ -20,6 +21,7 @@ class QuestionsListView @JvmOverloads constructor(
     private var showNextAfterCompletion = false
     private var errorMessage = ""
     private var mandatoryAnswers = false
+    private var questions = listOf<Question>()
     init {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
 
@@ -52,6 +54,7 @@ class QuestionsListView @JvmOverloads constructor(
         }
         if(showNextAfterCompletion) setOnAnsweredListeners(questions)
         this.addView(linearLayout)
+        this.questions = questions
     }
 
     private fun showNextQuestion(questions: List<Question>, question: Question){
@@ -65,5 +68,19 @@ class QuestionsListView @JvmOverloads constructor(
         for(question in questions){
             question.setOnAnsweredListener { showNextQuestion(questions, question) }
         }
+    }
+
+    fun getAnswers() : List<Answer>{
+        var answers = mutableListOf<Answer>()
+        if(questions.isNotEmpty()){
+            for(question in questions){
+                if(question.isAnswered()){
+                    answers.add(question.getAnswer()!!)
+                } else {
+                    answers.add(Answer(-1, ""))
+                }
+            }
+        }
+        return answers
     }
 }

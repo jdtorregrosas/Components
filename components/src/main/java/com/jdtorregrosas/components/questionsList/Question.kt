@@ -12,6 +12,9 @@ import android.view.View
 import android.widget.*
 import com.jdtorregrosas.components.questionsList.models.Answer
 import com.jdtorregrosas.components.questionsList.models.QuestionType
+import android.support.v4.widget.SearchViewCompat.setInputType
+
+
 
 /**
  * Created by julian on 7/09/17.
@@ -40,14 +43,13 @@ class Question(context: Context, type: QuestionType, labels: List<String>, answe
         linearLayout.addView(label)
 
         val errorLabel = AppCompatTextView(context)
-        errorLabel.text = SpannableString(errorMessage)
+        errorLabel.text = errorMessage
         errorLabel.setTextColor(Color.RED)
 
         when(type){
             QuestionType.OPEN -> {
                 val answerEditText = AppCompatEditText(context)
-                answerEditText.inputType = InputType.TYPE_CLASS_TEXT
-
+                answerEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
                 answerEditText.addTextChangedListener(object: TextWatcher{
                     override fun afterTextChanged(p0: Editable?) {}
                     override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
