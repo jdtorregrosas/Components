@@ -1,7 +1,7 @@
 # QuestionsList Component
 Create dynamically open or close questions
 
-![otp gif preview](./otp.gif)
+![questionsList preview](./questionsListMain.gif)
 ## Customization
 - Error message for mandatory questions
 - Questions appearing one after another

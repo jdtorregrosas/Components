@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Projects-components.iml" filepath="$PROJECT_DIR$/Projects-components.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/banlinea.mobile.android.components.iml" filepath="$PROJECT_DIR$/banlinea.mobile.android.components.iml" />
       <module fileurl="file://C:\Users\jdtor\Documents\Projects\components\banlinea.mobile.android.components.iml" filepath="C:\Users\jdtor\Documents\Projects\components\banlinea.mobile.android.components.iml" />
       <module fileurl="file://C:\Users\jdtor\Documents\Projects\components\banlinea.mobile.android.components\banlinea.mobile.android.components-banlinea.mobile.android.components.iml" filepath="C:\Users\jdtor\Documents\Projects\components\banlinea.mobile.android.components\banlinea.mobile.android.components-banlinea.mobile.android.components.iml" />
-      <module fileurl="file://$PROJECT_DIR$/components/components.iml" filepath="$PROJECT_DIR$/components/components.iml" />
-      <module fileurl="file://$PROJECT_DIR$/components.iml" filepath="$PROJECT_DIR$/components.iml" />
       <module fileurl="file://$PROJECT_DIR$/components/components-components.iml" filepath="$PROJECT_DIR$/components/components-components.iml" />
     </modules>
   </component>
