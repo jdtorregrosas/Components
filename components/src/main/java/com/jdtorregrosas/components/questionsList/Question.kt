@@ -9,27 +9,24 @@ import android.text.InputType
 import android.text.SpannableString
 import android.text.TextWatcher
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.LinearLayout
+import android.widget.Spinner
 import com.jdtorregrosas.components.questionsList.models.Answer
 import com.jdtorregrosas.components.questionsList.models.QuestionType
-import android.support.v4.widget.SearchViewCompat.setInputType
-
 
 
 /**
  * Created by julian on 7/09/17.
  * Question is a private component
  */
-class Question(context: Context, type: QuestionType, labels: List<String>, answers: MutableList<Answer> = mutableListOf(), var spinnerPlaceholder: String = "Select an answer", var isMandatory: Boolean = false, var errorMessage: String = "Answer the question") {
+class Question(private val context: Context, private val type: QuestionType, private var labels: List<String>, private var answers: MutableList<Answer> = mutableListOf(), var spinnerPlaceholder: String = "Select an answer", var isMandatory: Boolean = false, var errorMessage: String = "Answer the question") {
 
     private val linearLayout = LinearLayout(context)
     private var finalAnswer : Answer? = null
     private var isAnswered = false
     private var onAnsweredListener : () -> Unit = {}
-    private val context = context
-    private var labels = labels
-    private var answers = answers
-    private val type = type
 
     init {}
 

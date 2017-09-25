@@ -3,131 +3,91 @@ Create dynamically open or close questions
 
 ![otp gif preview](./otp.gif)
 ## Customization
-- Text color
-- Text size
-- Underline color
-- Placeholder color and text
-- Number of fields
-- Space between fields
+- Error message for mandatory questions
+- Questions appearing one after another
 
 ## How to use it
 1. Import the library component (see library README)
 2. Create the component view on the XML file as follows:
 ```xml
-    <com.jdtorregrosas.components.otp.OtpView xmlns:otp="http://schemas.android.com/apk/res-auto"
-        otp:hint="|"
-        otp:hintColor="#eeaaee"
-        otp:size="4"
-        otp:spaceBetween="10dp"
-        otp:textColor="#ff00ff"
-        otp:textSize="20sp"
-        otp:tintColor="#aa0"
-        otp:enableSms="true"
-        otp:smsKeyWord="Ualet"/>
+    <com.jdtorregrosas.components.questionsList.QuestionsListView
+            android:id="@+id/questionsListView"
+            xmlns:questions_list = "http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            questions_list:showNextAfterCompletion="true"
+            questions_list:mandatoryAnswers="true"
+            questions_list:errorMessage="Please answer the question"
+            />
 ```
 
 The table explains each attribute:
 
-|     Attribute     |           Description              |
-| ----------------- | ---------------------------------- |
-| hint              | Sets the placeholder symbol        |
-| hintColor         | Sets the placeholder color         |
-| size              | Sets the number of fields          |
-| spaceBetween      | Sets the margin beteween fields    |
-| textColor         | Sets the text color                |
-| textSize          | Sets the text size dimensions      |
-| tintColor         | Sets the underline color           |
-| enableSms         | Enables autofill from sms feature  |
-| smsKeyWord        | Sets keyword from sms for autofill |
+|     Attribute           |           Description                      |
+| ----------------------- | ------------------------------------------ |
+| showNextAfterCompletion | Enable auto appearing questions            |
+| mandatoryAnswers        | Enable errors on unanswered question       |
+| errorMessage            | Set error message for unanswered questions |
 
 3. Customize what you need with the custom attributes
-4. If you'll use autofill you must to register the receiver and unregister it like this:
-
+4. Create your questions list
 (Kotlin)
-```kotlin
-        override fun onCreate(savedInstanceState: Bundle?) {
-                ...
-                otpView.registerReceiver(this)
-                ...
-        }
-        override fun onPause() {
-                ...
-                otpView.unregisterReceiver(this)
-                ...
-        }
-        override fun onDestroy() {
-                ...
-                otpView.unregisterReceiver(this)
-                ...
-        }
-```
-(java)
-```java
-        public void onCreate(Bundle savedInstanceState)
-        {
-                ...
-                otpView.registerReceiver(this);
-                ...
-        }
-        public void onPause()
-        {
-                ...
-                otpView.unregisterReceiver(this);
-                ...
-        }
-        public void onDestroy()
-        {
-                ...
-                otpView.unregisterReceiver(this);
-                ...
-        }
+```Kotlin
+    /*
+    * For each questions it is optional to make it mandatory or to set an error message
+    */
+    // Create a list and add questions
+    val questions = mutableListOf<Question>()
+    // If a question must be OPEN, you onbly need the question text
+    questions.add(Question(mContext, QuestionType.OPEN, listOf("Are you feeling better today?"), isMandatory = true, errorMessage = "My error Message")))
+    // If the question is CLOSED you'll need the list of answers, the placeholder is optional
+    //
+    questions.add(Question(mContext, QuestionType.CLOSED, listOf("What colour shirt are you wearing?"),
+            mutableListOf(Answer(1, "Red"), Answer(2, "Green"), Answer(3, "Blue")), "select a color"))
+    questions.add(Question(mContext, QuestionType.OPEN, listOf("Do you like this?")))
+    questions.add(Question(mContext, QuestionType.OPEN, listOf("Do you get on well with your boss?")))
+    questions.add(Question(mContext, QuestionType.CLOSED, listOf("Where do you live?"),
+            mutableListOf(Answer(1, "Bogotá"), Answer(2, "Berlin"))))
+    questions.add(Question(mContext, QuestionType.OPEN, listOf("Who will you vote for this election?")))
+    questions.add(Question(mContext, QuestionType.CLOSED, listOf("Which food do you prefer?"),
+            mutableListOf(Answer(1, "Tomatoes"), Answer(2, "Pasta"), Answer(3, "Tuna"), Answer(2, "Fried chips"))))
+    questionsListView.setQuestions(questions)
+
 ```
 
-Add permissions on manifest
-
-```xml
-        <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
-        <uses-permission android:name="android.permission.READ_SMS" />
-```
-Note:
-If you need to support android 6+ you'll need to ask for permissions to the user like this:
-
-(Kotlin)
-```kotlin
-        private val REQUEST_SMS_RECEIVE = 1550
-        override fun onCreate(savedInstanceState: Bundle?) {
-                ...
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECEIVE_SMS), REQUEST_SMS_RECEIVE)
-                ...
-        }
-        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-                if (requestCode == REQUEST_SMS_RECEIVE) {
-                        otpView.registerReceiver(this)
-                }
-        }
-    }
-```
-(java)
-```java
-        private val REQUEST_SMS_RECEIVE = 1550;
-        public void onCreate(Bundle savedInstanceState)
-        {
-                ...
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, REQUEST_SMS_RECEIVE);
-                ...
-        }
-        @Override
-        public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-                if (requestCode == REQUEST_SMS_RECEIVE) {
-                        otpView.registerReceiver(this)
-                }
-        }
+(Java)
+```Java
+  /*
+      * For each questions it is optional to make it mandatory or to set an error message
+      */
+      // Create a list and add questions
+      ArrayList<Question> questions = new ArrayList<Question>()
+      // If a question must be OPEN, you onbly need the question text
+      questions.add(Question(mContext, QuestionType.OPEN, Arrays.asList("Are you feeling better today?"), isMandatory = true, errorMessage = "My error Message")))
+      // If the question is CLOSED you'll need the list of answers, the placeholder is optional
+      //
+      questions.add(Question(mContext, QuestionType.CLOSED, Arrays.asList("What colour shirt are you wearing?"),
+              mutableListOf(Answer(1, "Red"), Answer(2, "Green"), Answer(3, "Blue")), "select a color"))
+      questions.add(Question(mContext, QuestionType.OPEN, listOf("Do you like this?")))
+      questions.add(Question(mContext, QuestionType.OPEN, listOf("Do you get on well with your boss?")))
+      questions.add(Question(mContext, QuestionType.CLOSED, listOf("Where do you live?"),
+              mutableListOf(Answer(1, "Bogotá"), Answer(2, "Berlin"))))
+      questions.add(Question(mContext, QuestionType.OPEN, listOf("Who will you vote for this election?")))
+      questions.add(Question(mContext, QuestionType.CLOSED, listOf("Which food do you prefer?"),
+              mutableListOf(Answer(1, "Tomatoes"), Answer(2, "Pasta"), Answer(3, "Tuna"), Answer(2, "Fried chips"))))
+      questionsListView.setQuestions(questions)
 ```
 
-5. To get the code from the inputs you can use the function ```getCode():String```
 
-5. Enjoy!
+5. To get the code from the inputs you can use the function ```getAnswers():ArrayList<Answer>```
+
+Useful methods:
+
+|     Method              |              Description             |
+| ----------------------- | ------------------------------------ |
+| setQuestions(questions) | Set an array of questions            |
+| getAnswers()            | Retrieve an array of answers         |
+
+6. Enjoy!
 
 
