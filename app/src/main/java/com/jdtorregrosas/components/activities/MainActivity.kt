@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class MainActivity : AppCompatActivity() {
 
-    val mContext: Context = this
+    private val mContext: Context = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
         mainQuestionsListButton.setOnClickListener{
             _ -> navigateToQuestionsList()
         }
+        mainCarouselQuestionsButton.setOnClickListener{
+            _ -> navigateToCarouselQuestions()
+        }
     }
 
     private fun navigateToOtp(){
@@ -32,6 +35,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateToQuestionsList(){
         val i = Intent(mContext, QuestionsListActivity::class.java)
+        startActivity(i)
+    }
+
+    private fun navigateToCarouselQuestions(){
+        val i = Intent(mContext, CarouselQuestionsActivity::class.java)
         startActivity(i)
     }
 }
