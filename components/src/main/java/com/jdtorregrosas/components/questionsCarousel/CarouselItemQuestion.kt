@@ -7,15 +7,14 @@ import android.view.Gravity
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ScrollView
+import com.jdtorregrosas.components.questionsCarousel.models.CarouselAnswer
 
 /**
  * Created by jdtor on 25.09.2017 for components.
- * Item Question 
+ * Item Question
  */
 class CarouselItemQuestion(private val context: Context, private val label: String,  private val answers: MutableList<CarouselAnswer> ){
     private val scrollView = ScrollView(context)
-    //private val linearLayout = LinearLayout(context)
-
 
     init{
         scrollView.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
@@ -40,7 +39,5 @@ class CarouselItemQuestion(private val context: Context, private val label: Stri
     fun getView() : ScrollView{
         return scrollView
     }
-
 }
 
-data class CarouselAnswer(val label: String, val value:String)
