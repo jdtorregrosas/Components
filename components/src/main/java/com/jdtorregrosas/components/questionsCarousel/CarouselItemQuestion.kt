@@ -39,6 +39,7 @@ class CarouselItemQuestion(private val context: Context, private val label: Stri
     fun getView() : ScrollView{
         return scrollView
     }
+    
 }
 
 data class CarouselAnswer(val label: String, val value:String)
