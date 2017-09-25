@@ -10,6 +10,7 @@ import android.widget.ScrollView
 
 /**
  * Created by jdtor on 25.09.2017 for components.
+ * Item Question 
  */
 class CarouselItemQuestion(private val context: Context, private val label: String,  private val answers: MutableList<CarouselAnswer> ){
     private val scrollView = ScrollView(context)
@@ -39,7 +40,7 @@ class CarouselItemQuestion(private val context: Context, private val label: Stri
     fun getView() : ScrollView{
         return scrollView
     }
-    
+
 }
 
 data class CarouselAnswer(val label: String, val value:String)
