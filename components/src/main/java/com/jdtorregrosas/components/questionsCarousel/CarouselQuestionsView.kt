@@ -19,8 +19,11 @@ class CarouselQuestionsView @JvmOverloads constructor(
 ) : LinearLayout(context, attrs){
 
     private lateinit var viewPager : ViewPager
+    private lateinit var viewPagerIndicator : ViewPagerIndicator
     private var isNavigationDisabled = false
     init {
+        this.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+        this.orientation = LinearLayout.VERTICAL
         this.setPadding(20,20,20,20)
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.CarouselQuestionsView)
@@ -32,17 +35,33 @@ class CarouselQuestionsView @JvmOverloads constructor(
     @SuppressLint("ClickableViewAccessibility")
     fun setQuestions(questions: MutableList<CarouselItemQuestion>){
         viewPager = if(isNavigationDisabled) NonSwipeableViewPager(context) else ViewPager(context)
+        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+        layoutParams.weight = 1f
+        viewPager.layoutParams = layoutParams
         viewPager.adapter = QuestionsPagerAdapter(context, questions)
+        viewPagerIndicator = ViewPagerIndicator(context, viewPager.adapter.count)
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(state: Int) {}
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
+            override fun onPageSelected(position: Int) {
+                viewPagerIndicator.moveToItem(position)
+            }
+
+        })
         questions.forEach {
             it.setOnClickListener{
                 setNextCurrentItem(true)
             }
         }
         this.addView(viewPager)
+        this.addView(viewPagerIndicator)
     }
 
     private fun setNextCurrentItem(smoothScroll: Boolean) {
         viewPager.setCurrentItem(viewPager.currentItem+1, smoothScroll)
+        viewPagerIndicator.moveToItem(viewPager.currentItem)
     }
 }
 

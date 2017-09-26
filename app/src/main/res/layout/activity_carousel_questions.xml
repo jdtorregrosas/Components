@@ -10,5 +10,5 @@
         android:id="@+id/carouselQuestions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        carouselQuestions:disableNavigation="true"/>
+        carouselQuestions:disableNavigation="false"/>
 </android.support.constraint.ConstraintLayout>
