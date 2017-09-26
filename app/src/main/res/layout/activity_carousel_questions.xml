@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.jdtorregrosas.components.activities.CarouselQuestionsActivity">
     <com.jdtorregrosas.components.questionsCarousel.CarouselQuestionsView
+        xmlns:carouselQuestions = "http://schemas.android.com/apk/res-auto"
         android:id="@+id/carouselQuestions"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        carouselQuestions:disableNavigation="true"/>
 </android.support.constraint.ConstraintLayout>

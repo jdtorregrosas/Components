@@ -15,7 +15,7 @@ import com.jdtorregrosas.components.questionsCarousel.models.CarouselAnswer
  */
 class CarouselItemQuestion(private val context: Context, private val label: String,  private val answers: MutableList<CarouselAnswer> ){
     private val scrollView = ScrollView(context)
-
+    private var clickListener : ()->Unit = {}
     init{
         scrollView.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
         val linearLayout = LinearLayout(context)
@@ -31,6 +31,7 @@ class CarouselItemQuestion(private val context: Context, private val label: Stri
         answers.forEach {
             val answerButton = Button(context)
             answerButton.text = it.label
+            answerButton.setOnClickListener{clickListener()}
             linearLayout.addView(answerButton)
         }
         scrollView.addView(linearLayout)
@@ -38,6 +39,10 @@ class CarouselItemQuestion(private val context: Context, private val label: Stri
 
     fun getView() : ScrollView{
         return scrollView
+    }
+
+    fun setOnClickListener(listener: ()->Unit){
+        clickListener = listener
     }
 }
 
