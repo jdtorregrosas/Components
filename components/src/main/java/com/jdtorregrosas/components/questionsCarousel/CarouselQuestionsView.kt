@@ -40,6 +40,7 @@ class CarouselQuestionsView @JvmOverloads constructor(
         viewPager.layoutParams = layoutParams
         viewPager.adapter = QuestionsPagerAdapter(context, questions)
         viewPagerIndicator = ViewPagerIndicator(context, viewPager.adapter.count)
+        viewPagerIndicator.setPadding(20,20,20,20)
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {}
 
