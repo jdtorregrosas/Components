@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="CarouselQuestionsView">
         <attr name="disableNavigation" format="boolean"/>
+        <attr name="buttonColor" format="color" />
     </declare-styleable>
 </resources>

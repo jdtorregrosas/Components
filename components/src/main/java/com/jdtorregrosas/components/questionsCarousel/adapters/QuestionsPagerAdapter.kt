@@ -25,7 +25,7 @@ class QuestionsPagerAdapter(val context: Context, private val questions: Mutable
     }
 
     override fun instantiateItem(container: ViewGroup?, position: Int): Any {
-        val layout : ViewGroup = questions[position].getView()
+        val layout : ViewGroup = questions[position]
         container?.addView(layout)
         return layout
     }
