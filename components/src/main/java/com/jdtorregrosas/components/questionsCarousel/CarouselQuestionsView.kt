@@ -2,6 +2,8 @@ package com.jdtorregrosas.components.questionsCarousel
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.widget.LinearLayout
@@ -22,6 +24,8 @@ class CarouselQuestionsView (
     private lateinit var viewPagerIndicator : ViewPagerIndicator
     private var isNavigationDisabled = false
     private var buttonColor = Color.GRAY
+    private var enabledIndicator : Drawable? = null
+    private var disabledIndicator : Drawable? = null
     init {
         this.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
         this.orientation = LinearLayout.VERTICAL
@@ -30,6 +34,8 @@ class CarouselQuestionsView (
             val typedArray = context.obtainStyledAttributes(it, R.styleable.CarouselQuestionsView)
             isNavigationDisabled = typedArray.getBoolean(R.styleable.CarouselQuestionsView_disableNavigation, false)
             buttonColor = typedArray.getColor(R.styleable.CarouselQuestionsView_buttonColor, Color.GRAY)
+            enabledIndicator = typedArray.getDrawable(R.styleable.CarouselQuestionsView_enableIndicatorDrawable)
+            disabledIndicator = typedArray.getDrawable(R.styleable.CarouselQuestionsView_disableIndicatorDrawable)
             typedArray.recycle()
         }
     }
@@ -47,7 +53,7 @@ class CarouselQuestionsView (
             it.createQuestion()
         }
         viewPager.adapter = QuestionsPagerAdapter(context, questions)
-        viewPagerIndicator = ViewPagerIndicator(context, viewPager.adapter.count)
+        viewPagerIndicator = ViewPagerIndicator(context, viewPager.adapter.count, enabledIndicator, disabledIndicator)
         viewPagerIndicator.setPadding(20,20,20,20)
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {}

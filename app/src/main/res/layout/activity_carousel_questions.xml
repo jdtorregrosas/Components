@@ -10,5 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         carouselQuestions:disableNavigation="false"
-        carouselQuestions:buttonColor="@color/colorPrimaryDark"/>
+        carouselQuestions:buttonColor="@color/colorPrimaryDark"
+        carouselQuestions:enableIndicatorDrawable="@drawable/ic_custom_indicator_enabled"
+        carouselQuestions:disableIndicatorDrawable="@drawable/ic_custom_indicator_disabled"/>
 </android.support.constraint.ConstraintLayout>

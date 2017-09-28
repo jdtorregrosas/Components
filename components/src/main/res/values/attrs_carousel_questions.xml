@@ -3,5 +3,7 @@
     <declare-styleable name="CarouselQuestionsView">
         <attr name="disableNavigation" format="boolean"/>
         <attr name="buttonColor" format="color" />
+        <attr name="enableIndicatorDrawable" format="reference" />
+        <attr name="disableIndicatorDrawable" format="reference" />
     </declare-styleable>
 </resources>

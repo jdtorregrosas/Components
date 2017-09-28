@@ -1,7 +1,8 @@
 package com.jdtorregrosas.components.questionsCarousel
 
 import android.content.Context
-import android.media.Image
+import android.graphics.drawable.Drawable
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.ImageView
@@ -10,10 +11,13 @@ import banlinea.mobile.components.R
 
 /**
  * Created by jdtor on 26.09.2017 for components.
+ * Carousel indicator
  */
 class ViewPagerIndicator @JvmOverloads constructor(
         context: Context,
         size: Int,
+        var enableIndicatorDrawable: Drawable? = null,
+        var disableIndicatorDrawable: Drawable? = null,
         attrs: AttributeSet? = null
 ) : LinearLayout(context, attrs){
     private var currentIndex = 0
@@ -25,12 +29,18 @@ class ViewPagerIndicator @JvmOverloads constructor(
         this.layoutParams = layoutParams
         this.orientation = LinearLayout.HORIZONTAL
         this.gravity = Gravity.CENTER
+        if(enableIndicatorDrawable == null){
+            enableIndicatorDrawable = ContextCompat.getDrawable(context, R.drawable.ic_enabled_indicator)
+        }
+        if(disableIndicatorDrawable == null){
+            disableIndicatorDrawable = ContextCompat.getDrawable(context, R.drawable.ic_disabled_indicator)
+        }
         for(x in 0 until size){
             val indicator = ImageView(context)
             if(x == currentIndex){
-                indicator.setImageDrawable(resources.getDrawable(R.drawable.ic_enabled_indicator))
+                enableIndicator(indicator)
             } else {
-                indicator.setImageDrawable(resources.getDrawable(R.drawable.ic_disabled_indicator))
+                disableIndicator(indicator)
             }
             indicators.add(indicator)
             this.addView(indicator)
@@ -38,16 +48,23 @@ class ViewPagerIndicator @JvmOverloads constructor(
     }
 
     fun moveToNextItem(){
-        indicators[currentIndex].setImageDrawable(resources.getDrawable(R.drawable.ic_disabled_indicator))
+        disableIndicator(indicators[currentIndex])
         if(currentIndex+1 < indicators.size) currentIndex++
-        indicators[currentIndex].setImageDrawable(resources.getDrawable(R.drawable.ic_enabled_indicator))
+        enableIndicator(indicators[currentIndex])
     }
 
     fun moveToItem(index : Int){
-        indicators[currentIndex].setImageDrawable(resources.getDrawable(R.drawable.ic_disabled_indicator))
+        disableIndicator(indicators[currentIndex])
         if(index < indicators.size) currentIndex = index
-        indicators[index].setImageDrawable(resources.getDrawable(R.drawable.ic_enabled_indicator))
+        enableIndicator(indicators[index])
     }
 
+    private fun enableIndicator(indicator: ImageView){
+        indicator.setImageDrawable(enableIndicatorDrawable)
+    }
+
+    private fun disableIndicator(indicator: ImageView){
+        indicator.setImageDrawable(disableIndicatorDrawable)
+    }
 
 }
