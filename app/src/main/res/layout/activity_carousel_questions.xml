@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jdtorregrosas.components.activities.CarouselQuestionsActivity">
+    android:orientation="vertical">
     <com.jdtorregrosas.components.questionsCarousel.CarouselQuestionsView
         xmlns:carouselQuestions = "http://schemas.android.com/apk/res-auto"
         android:id="@+id/carouselQuestions"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         carouselQuestions:disableNavigation="false"
         carouselQuestions:buttonColor="@color/colorPrimaryDark"
         carouselQuestions:enableIndicatorDrawable="@drawable/ic_custom_indicator_enabled"
-        carouselQuestions:disableIndicatorDrawable="@drawable/ic_custom_indicator_disabled"/>
-</android.support.constraint.ConstraintLayout>
+        carouselQuestions:disableIndicatorDrawable="@drawable/ic_custom_indicator_disabled"
+        carouselQuestions:labelColor="@color/labelColor"
+        carouselQuestions:buttonTextColor="@color/buttonTextColor"/>
+    <Button
+        android:id="@+id/carouselQuestionsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show answers"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+</LinearLayout>

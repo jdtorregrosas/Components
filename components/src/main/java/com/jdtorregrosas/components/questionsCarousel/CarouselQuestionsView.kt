@@ -24,8 +24,11 @@ class CarouselQuestionsView (
     private lateinit var viewPagerIndicator : ViewPagerIndicator
     private var isNavigationDisabled = false
     private var buttonColor = Color.GRAY
+    private var buttonTextColor = Color.GRAY
+    private var labelColor = Color.GRAY
     private var enabledIndicator : Drawable? = null
     private var disabledIndicator : Drawable? = null
+    private var questions: List<CarouselItemQuestion> = listOf()
     init {
         this.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
         this.orientation = LinearLayout.VERTICAL
@@ -33,9 +36,11 @@ class CarouselQuestionsView (
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.CarouselQuestionsView)
             isNavigationDisabled = typedArray.getBoolean(R.styleable.CarouselQuestionsView_disableNavigation, false)
-            buttonColor = typedArray.getColor(R.styleable.CarouselQuestionsView_buttonColor, Color.GRAY)
             enabledIndicator = typedArray.getDrawable(R.styleable.CarouselQuestionsView_enableIndicatorDrawable)
             disabledIndicator = typedArray.getDrawable(R.styleable.CarouselQuestionsView_disableIndicatorDrawable)
+            labelColor = typedArray.getColor(R.styleable.CarouselQuestionsView_labelColor, Color.GRAY)
+            buttonTextColor = typedArray.getColor(R.styleable.CarouselQuestionsView_buttonTextColor, Color.GRAY)
+            buttonColor = typedArray.getColor(R.styleable.CarouselQuestionsView_buttonColor, Color.GRAY)
             typedArray.recycle()
         }
     }
@@ -47,6 +52,8 @@ class CarouselQuestionsView (
         viewPager.layoutParams = layoutParams
         questions.forEach {
             it.setButtonColor(buttonColor)
+            it.setLabelColor(labelColor)
+            it.setButtonTextColor(buttonTextColor)
             it.setOnClickListener{
                 setNextCurrentItem(true)
             }
@@ -68,11 +75,21 @@ class CarouselQuestionsView (
 
         this.addView(viewPager)
         this.addView(viewPagerIndicator)
+
+        this.questions = questions
     }
 
     private fun setNextCurrentItem(smoothScroll: Boolean) {
         viewPager.setCurrentItem(viewPager.currentItem + 1, smoothScroll)
         viewPagerIndicator.moveToItem(viewPager.currentItem)
+    }
+
+    fun getAnswers(): MutableList<String>{
+        val answers = mutableListOf<String>()
+        questions.forEach {
+            answers.add(it.getSelectedAnswer())
+        }
+        return answers
     }
 }
 

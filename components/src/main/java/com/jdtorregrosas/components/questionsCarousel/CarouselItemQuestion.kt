@@ -7,6 +7,7 @@ import android.support.v7.widget.AppCompatTextView
 import android.text.SpannableString
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -25,11 +26,15 @@ class CarouselItemQuestion(context: Context, private val label: String,
     private var selectedAnswer  = ""
     private var buttons = mutableListOf<Button>()
     private var buttonColor : Int = Color.GRAY
+    private var buttonTextColor : Int = Color.GRAY
+    private var labelColor : Int = Color.GRAY
 
     init{}
 
     fun createQuestion(){
         this.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+        this.isFillViewport = true
+        this.scrollBarStyle = View.SCROLLBARS_OUTSIDE_OVERLAY
         val linearLayout = LinearLayout(context)
         linearLayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         linearLayout.orientation = LinearLayout.VERTICAL
@@ -37,6 +42,7 @@ class CarouselItemQuestion(context: Context, private val label: String,
 
         linearLayout.setPadding(0,15,0,15)
         val questionLabel = AppCompatTextView(context)
+        questionLabel.setTextColor(labelColor)
         questionLabel.text = SpannableString(label)
         linearLayout.addView(questionLabel)
 
@@ -47,28 +53,34 @@ class CarouselItemQuestion(context: Context, private val label: String,
             attrs?.let {
                 val typedArray = context.obtainStyledAttributes(it, R.styleable.CarouselItemQuestion, 0, 0)
                 buttonColor = typedArray.getColor(R.styleable.CarouselItemQuestion_buttonItemColor, Color.GRAY)
+                buttonTextColor = typedArray.getColor(R.styleable.CarouselItemQuestion_buttonItemTextColor, Color.GRAY)
                 typedArray.recycle()
             }
             answerButton.setBackgroundColor(buttonColor)
             val buttonParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
             buttonParams.setMargins(20,20,20,20)
             answerButton.layoutParams =  buttonParams
+            answerButton.setTextColor(buttonTextColor)
+            answerButton.setAllCaps(false)
             answerButton.setOnClickListener{ button ->
                 val buttonBackground = button.background
 
                 if(buttonBackground is ColorDrawable){
                     buttons.forEach {
                         if(it == button){
-                            val color = buttonBackground.color
-                            it.setBackgroundColor(Color.argb(80, Color.red(color), Color.green(color), Color.blue(color)))
+                            it.setBackgroundColor(Color.argb(90, Color.red(buttonColor), Color.green(buttonColor), Color.blue(buttonColor)))
+                            it.setTextColor(Color.argb(95, Color.red(buttonTextColor), Color.green(buttonTextColor), Color.blue(buttonTextColor)))
                         } else {
                             it.setBackgroundColor(buttonColor)
+                            it.setTextColor(buttonTextColor)
                         }
                     }
                 }
                 clickListener()
+                selectedAnswer = it.value
 
             }
+            selectedAnswer = ""
             buttons.add(answerButton)
             linearLayout.addView(answerButton)
         }
@@ -85,6 +97,13 @@ class CarouselItemQuestion(context: Context, private val label: String,
 
     fun setButtonColor(color: Int){
         buttonColor = color
+    }
+    fun setButtonTextColor(color: Int){
+        buttonTextColor = color
+    }
+
+    fun setLabelColor(color: Int){
+        labelColor = color
     }
 }
 

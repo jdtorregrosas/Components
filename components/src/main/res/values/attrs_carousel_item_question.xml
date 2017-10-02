@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="CarouselItemQuestion">
         <attr name="buttonItemColor" format="color"/>
+        <attr name="buttonItemTextColor" format="color"/>
     </declare-styleable>
 </resources>

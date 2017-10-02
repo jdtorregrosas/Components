@@ -7,6 +7,7 @@ import banlinea.mobile.components.R
 import com.jdtorregrosas.components.questionsCarousel.CarouselItemQuestion
 import com.jdtorregrosas.components.questionsCarousel.models.CarouselAnswer
 import kotlinx.android.synthetic.main.activity_carousel_questions.*
+import org.jetbrains.anko.alert
 
 class CarouselQuestionsActivity : AppCompatActivity() {
 
@@ -15,52 +16,34 @@ class CarouselQuestionsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carousel_questions)
-        val question1 = CarouselItemQuestion(mContext, "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                mutableListOf(CarouselAnswer("test", "test"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2")))
-        val question2 = CarouselItemQuestion(mContext, "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                mutableListOf(CarouselAnswer("test", "test"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2")))
-        val question3 = CarouselItemQuestion(mContext, "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   \n" +
-                "\n" +
-                "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,",
-                mutableListOf(CarouselAnswer("test", "test"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2")))
-        val question4 = CarouselItemQuestion(mContext, "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                mutableListOf(CarouselAnswer("test", "test"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2")))
-        val question5 = CarouselItemQuestion(mContext, "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                mutableListOf(CarouselAnswer("test", "test"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2")))
-        val question6 = CarouselItemQuestion(mContext, "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                mutableListOf(CarouselAnswer("test", "test"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2"),
-                        CarouselAnswer("test2", "test2")))
+        val question1 = CarouselItemQuestion(mContext, "Complete this phrase. As sick as a...",
+                mutableListOf(CarouselAnswer("Penguin", "Penguin"),
+                        CarouselAnswer("Parrot", "Parrot"),
+                        CarouselAnswer("Puffin", "Puffin"),
+                        CarouselAnswer("Partridge", "Partridge")))
+        val question2 = CarouselItemQuestion(mContext, "Which legal document states a person's wishes regarding the disposal of their property after death?",
+                mutableListOf(CarouselAnswer("Should", "Should"),
+                        CarouselAnswer("Will", "Will"),
+                        CarouselAnswer("Shall", "Shall"),
+                        CarouselAnswer("Would", "Would")))
+        val question3 = CarouselItemQuestion(mContext, "Complete the title of the James Bond film The Man With The Golden...",
+                mutableListOf(CarouselAnswer("Gun", "Gun"),
+                        CarouselAnswer("Tooth", "Tooth"),
+                        CarouselAnswer("Delicious", "Delicious"),
+                        CarouselAnswer("Eagle", "Eagle"),
+                        CarouselAnswer("Treasure", "Treasure"),
+                        CarouselAnswer("Foot", "Foot"),
+                        CarouselAnswer("Handy", "Handy"),
+                        CarouselAnswer("Balls", "Balls"),
+                        CarouselAnswer("Finger", "Finger")))
 
-        carouselQuestions.setQuestions(mutableListOf(question1, question2, question3, question4, question5, question6))
+        carouselQuestions.setQuestions(mutableListOf(question1, question2, question3))
+        carouselQuestionsButton.setOnClickListener{
+            val answers = carouselQuestions.getAnswers()
+            var normalizeAnswers = ""
+            answers.forEachIndexed{index, answer -> normalizeAnswers += "$index: $answer\n" }
+            alert(normalizeAnswers, "Answers:").show()
+        }
 
     }
 }

@@ -20,7 +20,7 @@
         </activity>
         <activity android:name="com.jdtorregrosas.components.activities.OtpActivity" />
         <activity android:name="com.jdtorregrosas.components.activities.QuestionsListActivity" />
-        <activity android:name="com.jdtorregrosas.components.activities.CarouselQuestionsActivity"></activity>
+        <activity android:name="com.jdtorregrosas.components.activities.CarouselQuestionsActivity" />
     </application>
 
 </manifest>
