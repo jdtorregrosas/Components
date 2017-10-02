@@ -13,7 +13,7 @@ Everything made in Kotlin.
 <dependency>
   <groupId>com.jdtorregrosas</groupId>
   <artifactId>components</artifactId>
-  <version>0.1.0</version>
+  <version>0.3.0</version>
   <type>pom</type>
 </dependency>
 ```
