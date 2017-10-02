@@ -3,9 +3,9 @@ This repo has a set of commonly used components through the android mobile appli
 Everything made in Kotlin.
 
 ## Components
-### 1. [OtpView component](./src/main/java/com/jdtorregrosas/components/otp/README.md)
-### 2. [QuestionsListView component](./src/main/java/com/jdtorregrosas/components/questionsList/README.md)
-### 3. [QuestionsCarouselView component](./src/main/java/com/jdtorregrosas/components/questionsCarousel/README.md)
+### 1. [OtpView component](./components/src/main/java/com/jdtorregrosas/components/otp/README.md)
+### 2. [QuestionsListView component](./components/src/main/java/com/jdtorregrosas/components/questionsList/README.md)
+### 3. [QuestionsCarouselView component](./components/src/main/java/com/jdtorregrosas/components/questionsCarousel/README.md)
 
 ## Import
 ### Maven
