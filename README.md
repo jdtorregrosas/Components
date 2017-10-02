@@ -20,7 +20,7 @@ Everything made in Kotlin.
 
 ### Gradle
 ```xml
-compile 'com.jdtorregrosas:components:0.1.0'
+compile 'com.jdtorregrosas:components:0.3.0'
 ```
 
 ## Demo
