@@ -9,6 +9,7 @@ import com.jdtorregrosas.components.questionsList.models.Answer
 import com.jdtorregrosas.components.questionsList.models.QuestionType
 import kotlinx.android.synthetic.main.activity_questions_list.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.jetbrains.anko.alert
 
 class QuestionsListActivity : AppCompatActivity() {
 
@@ -34,10 +35,12 @@ class QuestionsListActivity : AppCompatActivity() {
                 mutableListOf(Answer(1, "Tomatoes"), Answer(2, "Pasta"), Answer(3, "Tuna"), Answer(2, "Fried chips"))))
         questionsListView.setQuestions(questions)
 
-        questionsListViewButtonLog.setOnClickListener{
-            _ -> questionsListView.getAnswers().map {
-                println("${it.number} ${it.value}")
+        questionsListViewButton.setOnClickListener{
+            var answers = ""
+            questionsListView.getAnswers().forEach {
+                answers += "${it.number}: ${it.value} \n"
             }
+            alert(answers, "Answers:").show()
         }
     }
 }

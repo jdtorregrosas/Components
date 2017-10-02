@@ -17,10 +17,10 @@
         />
 
     <Button
-        android:id="@+id/questionsListViewButtonLog"
+        android:id="@+id/questionsListViewButton"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Log answers on console" />
+        android:text="Show answers" />
 </LinearLayout>
 
