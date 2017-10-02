@@ -128,6 +128,6 @@ If you need to support android 6+ you'll need to ask for permissions to the user
 
 5. To get the code from the inputs you can use the function ```getCode():String```
 
-5. Enjoy!
+6. Enjoy!
 
 
