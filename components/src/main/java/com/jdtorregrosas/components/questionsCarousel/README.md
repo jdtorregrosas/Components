@@ -1,7 +1,7 @@
 # QuestionsCarousel Component
 Create a questions carousel with your customized colors and indicator
 
-![otp gif preview](./otp.gif)
+![questionsCarousel gif preview](./questionsCarousel.gif)
 ## Customization
 - Labels color
 - Buttons text color
