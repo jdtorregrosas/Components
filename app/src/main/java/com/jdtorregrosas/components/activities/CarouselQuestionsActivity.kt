@@ -3,7 +3,7 @@ package com.jdtorregrosas.components.activities
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import banlinea.mobile.components.R
+import com.jdtorregrosas.components.R
 import com.jdtorregrosas.components.questionsCarousel.CarouselItemQuestion
 import com.jdtorregrosas.components.questionsCarousel.models.CarouselAnswer
 import kotlinx.android.synthetic.main.activity_carousel_questions.*

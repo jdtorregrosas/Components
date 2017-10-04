@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.widget.Toolbar
-import banlinea.mobile.components.R
+import com.jdtorregrosas.components.R
 import kotlinx.android.synthetic.main.activity_otp.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.alert

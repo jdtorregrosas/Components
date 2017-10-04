@@ -3,7 +3,7 @@ package com.jdtorregrosas.components.activities
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import banlinea.mobile.components.R
+import com.jdtorregrosas.components.R
 import com.jdtorregrosas.components.questionsList.Question
 import com.jdtorregrosas.components.questionsList.models.Answer
 import com.jdtorregrosas.components.questionsList.models.QuestionType
